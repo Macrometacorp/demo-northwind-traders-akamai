@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import { theme } from "./theme";
+import Sidebar from "./components/Sidebar";
+
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Suppliers from "./pages/Suppliers";
+import Products from "./pages/Products";
+import Orders from "./pages/Orders";
+import Employees from "./pages/Employees";
+import Customers from "./pages/Customers";
+import Search from "./pages/Search";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider theme={theme}>
+      <BrowserRouter>
+        <Sidebar>
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/search" element={<Search />} />
+          </Routes>
+        </Sidebar>
+      </BrowserRouter>
+    </ChakraProvider>
   );
 }
-
-export default App;

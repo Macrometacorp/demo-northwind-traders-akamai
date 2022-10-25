@@ -62,7 +62,7 @@ export default function Sidebar({ children }) {
       {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
 
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }} p={6}>
         {children}
       </Box>
     </Box>
@@ -80,7 +80,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+      <Flex h={20} alignItems="center" mx={8} justifyContent="space-between">
         <Logotype />
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
@@ -104,8 +104,8 @@ const NavItem = ({ icon, path, children, ...rest }) => {
     >
       <Flex
         align="center"
-        p="3"
-        mx="4"
+        p={3}
+        mx={4}
         borderRadius="lg"
         role="group"
         cursor="pointer"
@@ -114,7 +114,7 @@ const NavItem = ({ icon, path, children, ...rest }) => {
       >
         {icon && (
           <Icon
-            mr="4"
+            mr={4}
             fontSize="16"
             as={icon}
             // _groupHover={{ color: "white" }}
@@ -131,7 +131,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
     <Flex
       ml={{ base: 0, md: 60 }}
       px={{ base: 4, md: 24 }}
-      height="20"
+      h={20}
       alignItems="center"
       bg={useColorModeValue("white", "gray.800")}
       borderBottomWidth="1px"
@@ -146,7 +146,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
         icon={<FaBars />}
       />
 
-      <Logotype ml="4" />
+      <Logotype ml={4} />
     </Flex>
   );
 };

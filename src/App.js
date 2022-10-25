@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Suppliers from "./pages/Suppliers";
+import SupplierDetail from "./pages/SupplierDetail";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import Employees from "./pages/Employees";
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/" exact element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/suppliers/:id" element={<SupplierDetail />} />
             <Route path="/products" element={<Products />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/employees" element={<Employees />} />

@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import DetailCard from "../components/DetailCard";
 import { getProductById } from "../services";
 
-export default function SupplierDetail() {
+export default function ProductDetail() {
   const [product, setProduct] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
-    const getSupplier = async () => {
+    const getProduct = async () => {
       const product = await getProductById(Number(id));
 
       const data = [
@@ -30,7 +30,7 @@ export default function SupplierDetail() {
 
       setProduct(data);
     };
-    getSupplier().catch(console.error);
+    getProduct().catch(console.error);
   }, [id]);
 
   return (

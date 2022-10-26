@@ -13,6 +13,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Orders from "./pages/Orders";
 import Employees from "./pages/Employees";
 import Customers from "./pages/Customers";
+import CustomerDetail from "./pages/CustomerDetail";
 import Search from "./pages/Search";
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/customers" element={<Customers />} />
+            <Route path="/customers/:id" element={<CustomerDetail />} />
             <Route path="/search" element={<Search />} />
           </Routes>
         </Sidebar>

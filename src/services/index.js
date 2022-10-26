@@ -71,6 +71,34 @@ const products = [
   },
 ];
 
+const customers = [
+  {
+    id: 1,
+    name: "Maria Anders",
+    title: "Sales Representative",
+    companyName: "Alfreds Futterkiste",
+    address: "Obere Str. 57",
+    city: "Berlin",
+    region: "Western Europe",
+    country: "Germany",
+    postalCode: "12209",
+    phone: "30-0074321",
+    fax: "030-0076545",
+  },
+  {
+    id: 2,
+    name: "Antonio Moreno",
+    title: "Owner",
+    companyName: "Antonio Moreno Taquería",
+    address: "Mataderos 2312",
+    city: "México D.F.",
+    region: "Central America",
+    country: "Mexico",
+    postalCode: "05023",
+    phone: "(5) 555-3932",
+  },
+];
+
 export async function getSuppliers() {
   return Promise.resolve(suppliers);
 }
@@ -97,6 +125,22 @@ export async function getProductById(id) {
 
     if (product.id === id) {
       return Promise.resolve(product);
+    }
+  }
+
+  return Promise.resolve({});
+}
+
+export async function getCustomers() {
+  return Promise.resolve(customers);
+}
+
+export async function getCustomerById(id) {
+  for (let i = 0; i < customers.length; i++) {
+    const customer = customers[i];
+
+    if (customer.id === id) {
+      return Promise.resolve(customer);
     }
   }
 

@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Suppliers from "./pages/Suppliers";
 import SupplierDetail from "./pages/SupplierDetail";
 import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
 import Orders from "./pages/Orders";
 import Employees from "./pages/Employees";
 import Customers from "./pages/Customers";
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/suppliers" element={<Suppliers />} />
             <Route path="/suppliers/:id" element={<SupplierDetail />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/customers" element={<Customers />} />

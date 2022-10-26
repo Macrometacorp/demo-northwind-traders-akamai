@@ -18,10 +18,16 @@ export default function DetailCard({ title, data, goBackPath }) {
         {title}
       </Heading>
       <Grid templateColumns="repeat(2, 1fr)" gap="4">
-        {data.map(({ label, value }, i) => (
+        {data.map(({ label, value, linkTo }, i) => (
           <GridItem key={i}>
             <Text fontWeight="bold">{label}</Text>
-            <Text>{value}</Text>
+            {linkTo ? (
+              <Link to={linkTo}>
+                <Text>{value}</Text>
+              </Link>
+            ) : (
+              <Text>{value}</Text>
+            )}
           </GridItem>
         ))}
       </Grid>

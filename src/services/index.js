@@ -180,6 +180,49 @@ const orders = [
   },
 ];
 
+const employees = [
+  {
+    id: 1,
+    name: "Andrew Fuller",
+    title: "Vice President, Sales",
+    titleOfCourtesy: "Dr.",
+    birthDate: "1984-02-19",
+    homePhone: "(206) 555-9482",
+    hireDate: "2020-08-04",
+    extension: "3457",
+    notes:
+      "Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing from the University of Dallas in 1981.",
+    address: {
+      streetLine: "908 W. Capital Way",
+      city: "Tacoma",
+      country: "USA",
+      postalCode: "98401",
+    },
+  },
+  {
+    id: 2,
+    name: "Nancy Davolio",
+    title: "Sales Representative",
+    titleOfCourtesy: "Ms.",
+    birthDate: "1980-12-08",
+    homePhone: "(206) 555-9857",
+    hireDate: "2020-05-01",
+    extension: "5467",
+    notes:
+      "Education includes a BA in psychology from Colorado State University in 1970.",
+    address: {
+      streetLine: "507 - 20th Ave. E. Apt. 2A",
+      city: "Seattle",
+      country: "USA",
+      postalCode: "98122",
+    },
+    reportsTo: {
+      id: 1,
+      name: "Andrew Fuller",
+    },
+  },
+];
+
 export async function getSuppliers() {
   return Promise.resolve(suppliers);
 }
@@ -238,6 +281,22 @@ export async function getCustomerById(id) {
 
     if (customer.id === id) {
       return Promise.resolve(customer);
+    }
+  }
+
+  return Promise.resolve({});
+}
+
+export async function getEmployees() {
+  return Promise.resolve(employees);
+}
+
+export async function getEmployeeById(id) {
+  for (let i = 0; i < employees.length; i++) {
+    const employee = employees[i];
+
+    if (employee.id === id) {
+      return Promise.resolve(employee);
     }
   }
 

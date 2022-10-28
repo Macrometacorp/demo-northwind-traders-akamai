@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import { Suppliers, SupplierDetail } from "./pages/suppliers";
 import { Products, ProductDetail } from "./pages/products";
 import { Orders, OrderDetail } from "./pages/orders";
-import Employees from "./pages/Employees";
+import { Employees, EmployeeDetail } from "./pages/employees";
 import { Customers, CustomerDetail } from "./pages/customers";
 import Search from "./pages/Search";
 
@@ -28,6 +28,7 @@ export default function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/:id" element={<OrderDetail />} />
             <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/:id" element={<EmployeeDetail />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/customers/:id" element={<CustomerDetail />} />
             <Route path="/search" element={<Search />} />

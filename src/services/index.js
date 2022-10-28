@@ -114,7 +114,7 @@ const orders = [
           quantity: 20,
           price: 18,
           totalPrice: 342,
-          discount: 0.05
+          discount: 0.05,
         },
         {
           id: 3,
@@ -122,26 +122,26 @@ const orders = [
           quantity: 30,
           price: 10,
           totalPrice: 300,
-          discount: 0
-        }
+          discount: 0,
+        },
       ],
       differentProductCount: 2,
       totalQuantity: 50,
       totalDiscount: 18,
-      totalPrice: 642.00
+      totalPrice: 642.0,
     },
     shipping: {
-      shippedDate: "2022-09-21",
-      requiredDate: "2022-09-30",
+      shippedDate: "2022-10-05",
+      requiredDate: "2022-10-08",
       via: "Speedy Express",
       freight: "20.42",
-      address: "Mataderos 2312",
-      city: "México D.F.",
-      region: "Central America",
-      country: "Mexico",
-      postalCode: "05023",
+      address: "Obere Str. 57",
+      city: "Berlin",
+      region: "Western Europe",
+      country: "Germany",
+      postalCode: "12209",
     },
-    createdAt: "2022-09-20"
+    createdAt: "2022-09-20",
   },
   {
     id: 20000,
@@ -157,28 +157,28 @@ const orders = [
           quantity: 15,
           price: 21,
           totalPrice: 299.25,
-          discount: 0.05
+          discount: 0.05,
         },
       ],
       differentProductCount: 1,
       totalQuantity: 15,
       totalDiscount: 15.75,
-      totalPrice: 299.25
+      totalPrice: 299.25,
     },
     shipping: {
-      shippedDate: "2022-10-05",
-      requiredDate: "2022-10-08",
+      shippedDate: "2022-09-21",
+      requiredDate: "2022-09-30",
       via: "Speedy Express",
       freight: "20.42",
-      address: "Obere Str. 57",
-      city: "Berlin",
-      region: "Western Europe",
-      country: "Germany",
-      postalCode: "12209",
+      address: "Mataderos 2312",
+      city: "México D.F.",
+      region: "Central America",
+      country: "Mexico",
+      postalCode: "05023",
     },
-    createdAt: "2022-10-02"
-  }
-]
+    createdAt: "2022-10-02",
+  },
+];
 
 export async function getSuppliers() {
   return Promise.resolve(suppliers);

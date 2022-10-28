@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import DetailCard from "../components/DetailCard";
-import { getSupplierById } from "../services";
+import DetailCard from "../../components/DetailCard";
+import { getSupplierById } from "../../services";
 
-export default function SupplierDetail() {
+export function SupplierDetail() {
   const [supplier, setSupplier] = useState([]);
 
   const { id } = useParams();

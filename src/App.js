@@ -6,14 +6,11 @@ import Sidebar from "./components/Sidebar";
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import Suppliers from "./pages/Suppliers";
-import SupplierDetail from "./pages/SupplierDetail";
-import Products from "./pages/Products";
-import ProductDetail from "./pages/ProductDetail";
-import { Orders, OrderDetail } from "./pages/orders"
+import { Suppliers, SupplierDetail } from "./pages/suppliers";
+import { Products, ProductDetail } from "./pages/products";
+import { Orders, OrderDetail } from "./pages/orders";
 import Employees from "./pages/Employees";
-import Customers from "./pages/Customers";
-import CustomerDetail from "./pages/CustomerDetail";
+import { Customers, CustomerDetail } from "./pages/customers";
 import Search from "./pages/Search";
 
 export default function App() {

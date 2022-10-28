@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import DetailCard from "../components/DetailCard";
-import { getCustomerById } from "../services";
+import DetailCard from "../../components/DetailCard";
+import { getCustomerById } from "../../services";
 
-export default function CustomerDetail() {
+export function CustomerDetail() {
   const [customer, setCustomer] = useState([]);
 
   const { id } = useParams();

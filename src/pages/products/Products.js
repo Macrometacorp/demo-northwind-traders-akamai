@@ -3,8 +3,8 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
-import DataTable from "../components/DataTable";
-import { getProducts } from "../services";
+import DataTable from "../../components/DataTable";
+import { getProducts } from "../../services";
 
 const columnHelper = createColumnHelper();
 
@@ -35,7 +35,7 @@ const columns = [
   }),
 ];
 
-export default function App() {
+export function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

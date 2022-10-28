@@ -99,6 +99,87 @@ const customers = [
   },
 ];
 
+const orders = [
+  {
+    id: 10100,
+    customer: {
+      id: 1,
+      companyName: "Alfreds Futterkiste",
+    },
+    products: {
+      list: [
+        {
+          id: 1,
+          name: "Chai",
+          quantity: 20,
+          price: 18,
+          totalPrice: 342,
+          discount: 0.05
+        },
+        {
+          id: 3,
+          name: "Aniseed Syrup",
+          quantity: 30,
+          price: 10,
+          totalPrice: 300,
+          discount: 0
+        }
+      ],
+      differentProductCount: 2,
+      totalQuantity: 50,
+      totalDiscount: 18,
+      totalPrice: 642.00
+    },
+    shipping: {
+      shippedDate: "2022-09-21",
+      requiredDate: "2022-09-30",
+      via: "Speedy Express",
+      freight: "20.42",
+      address: "Mataderos 2312",
+      city: "México D.F.",
+      region: "Central America",
+      country: "Mexico",
+      postalCode: "05023",
+    },
+    createdAt: "2022-09-20"
+  },
+  {
+    id: 20000,
+    customer: {
+      id: 2,
+      companyName: "Antonio Moreno Taquería",
+    },
+    products: {
+      list: [
+        {
+          id: 11,
+          name: "Queso Cabrales",
+          quantity: 15,
+          price: 21,
+          totalPrice: 299.25,
+          discount: 0.05
+        },
+      ],
+      differentProductCount: 1,
+      totalQuantity: 15,
+      totalDiscount: 15.75,
+      totalPrice: 299.25
+    },
+    shipping: {
+      shippedDate: "2022-10-05",
+      requiredDate: "2022-10-08",
+      via: "Speedy Express",
+      freight: "20.42",
+      address: "Obere Str. 57",
+      city: "Berlin",
+      region: "Western Europe",
+      country: "Germany",
+      postalCode: "12209",
+    },
+    createdAt: "2022-10-02"
+  }
+]
+
 export async function getSuppliers() {
   return Promise.resolve(suppliers);
 }
@@ -125,6 +206,22 @@ export async function getProductById(id) {
 
     if (product.id === id) {
       return Promise.resolve(product);
+    }
+  }
+
+  return Promise.resolve({});
+}
+
+export async function getOrders() {
+  return Promise.resolve(orders);
+}
+
+export async function getOrderById(id) {
+  for (let i = 0; i < orders.length; i++) {
+    const order = orders[i];
+
+    if (order.id === id) {
+      return Promise.resolve(order);
     }
   }
 

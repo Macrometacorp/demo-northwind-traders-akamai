@@ -32,9 +32,11 @@ export default function DetailCard({ title, data, goBackPath }) {
         ))}
       </Grid>
       <Flex justify="flex-start" align="center" mt={6}>
-        <Link to={goBackPath}>
-          <Button colorScheme={"gray"}>Go Back</Button>
-        </Link>
+        {goBackPath ? (
+          <Link to={goBackPath}>
+            <Button colorScheme={"gray"}>Go Back</Button>
+          </Link>
+        ) : null}
       </Flex>
     </Box>
   );

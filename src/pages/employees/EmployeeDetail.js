@@ -14,25 +14,25 @@ export function EmployeeDetail() {
       const employee = await getEmployeeById(Number(id));
 
       const data = [
-        { label: "Name", value: employee.name },
-        { label: "Postal Code", value: employee.address.postalCode },
-        { label: "Title", value: employee.title },
-        { label: "Country", value: employee.address.country },
-        { label: "Title of Courtesy", value: employee.titleOfCourtesy },
-        { label: "Home Phone", value: employee.homePhone },
-        { label: "Birth Date", value: employee.birthDate },
-        { label: "Extension", value: employee.extension },
-        { label: "Hire Date", value: employee.hireDate },
-        { label: "Notes", value: employee.notes },
-        { label: "Address", value: employee.address.streetLine },
-        {
-          label: "Reports To",
-          value: employee.reportsTo?.name,
-          linkTo: employee.reportsTo
-            ? `/employees/${employee.reportsTo.id}`
-            : null,
-        },
-        { label: "City", value: employee.address.city },
+        { label: "Name", value: employee.FirstName },
+        { label: "Postal Code", value: employee.PostalCode },
+        { label: "Title", value: employee.Title },
+        { label: "Country", value: employee.Country },
+        { label: "Title of Courtesy", value: employee.TitleOfCourtesy },
+        { label: "Home Phone", value: employee.HomePhone },
+        { label: "Birth Date", value: employee.BirthDate },
+        { label: "Extension", value: employee.Extension },
+        { label: "Hire Date", value: employee.HireDate },
+        { label: "Notes", value: employee.Notes },
+        { label: "Address", value: employee.Address },
+        // {
+        //   label: "Reports To",
+        //   value: employee.reportsTo?.name,
+        //   linkTo: employee.reportsTo
+        //     ? `/employees/${employee.reportsTo.id}`
+        //     : null,
+        // },
+        { label: "City", value: employee.City },
       ];
 
       setEmployee(data);

@@ -1,55 +1,73 @@
 import { useEffect, useState } from "react";
-import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
-import DataTable from "../../components/DataTable";
+import MyTable from "../../components/MyTable";
+import Pagination from "../../components/Pagination";
 import { getEmployees } from "../../services";
 
-const columnHelper = createColumnHelper();
-
 const columns = [
-  columnHelper.accessor("name", {
-    header: "Name",
-    cell: (info) => {
+  {
+    Header: "Name",
+    accessor: "FirstName",
+    Cell: (info) => {
       return (
-        <Link to={`/employees/${info.row.original.id}`}>{info.getValue()}</Link>
+        <Link to={`/employees/${info.row.original._key}`}>{info.value}</Link>
       );
     },
-  }),
-  columnHelper.accessor("title", {
-    header: "Title",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("address.city", {
-    header: "City",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("homePhone", {
-    header: "Phone",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("address.country", {
-    header: "Country",
-    cell: (info) => info.getValue(),
-  }),
+  },
+  {
+    Header: "Title",
+    accessor: "Title",
+  },
+  {
+    Header: "City",
+    accessor: "City",
+  },
+  {
+    Header: "Phone",
+    accessor: "HomePhone",
+  },
+  {
+    Header: "Country",
+    accessor: "Country",
+  },
 ];
 
 export function Employees() {
-  const [employees, setEmployees] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5;
+
+  const [employees, setEmployees] = useState({
+    data: [],
+    total: 0,
+  });
 
   useEffect(() => {
-    const _getEmployees = async () => {
-      const _employees = await getEmployees();
-      setEmployees(_employees);
+    const get = async () => {
+      const employees = await getEmployees({
+        page: currentPage,
+        pageSize,
+      });
+
+      setEmployees({
+        data: employees.data,
+        total: employees.total,
+      });
     };
 
-    _getEmployees().catch(console.error);
-  }, []);
+    get().catch(console.error);
+  }, [currentPage]);
 
   return (
     <Box p="6" bg={useColorModeValue("white", "gray.800")} rounded="lg">
-      <DataTable title="Employees" columns={columns} data={employees} />
+      <MyTable title="Employees" columns={columns} data={employees.data} />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalItems={employees.total}
+        ItemsPerPage={pageSize}
+      />
     </Box>
   );
 }

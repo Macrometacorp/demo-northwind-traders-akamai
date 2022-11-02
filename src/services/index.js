@@ -1,3 +1,7 @@
+const baseUrl = process.env.REACT_APP_GDN_API_URL;
+const fabric = process.env.REACT_APP_FABRIC_NAME;
+const apiKey = process.env.REACT_APP_API_KEY;
+
 // Hard-coded dummy data
 const suppliers = [
   {
@@ -182,44 +186,40 @@ const orders = [
 
 const employees = [
   {
-    id: 1,
-    name: "Andrew Fuller",
-    title: "Vice President, Sales",
-    titleOfCourtesy: "Dr.",
-    birthDate: "1984-02-19",
-    homePhone: "(206) 555-9482",
-    hireDate: "2020-08-04",
-    extension: "3457",
-    notes:
+    _key: 1,
+    FirstName: "Andrew",
+    Title: "Vice President, Sales",
+    TitleOfCourtesy: "Dr.",
+    BirthDate: "1984-02-19",
+    HomePhone: "(206) 555-9482",
+    HireDate: "2020-08-04",
+    Extension: "3457",
+    Notes:
       "Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing from the University of Dallas in 1981.",
-    address: {
-      streetLine: "908 W. Capital Way",
-      city: "Tacoma",
-      country: "USA",
-      postalCode: "98401",
-    },
+    Address: "908 W. Capital Way",
+    City: "Tacoma",
+    Country: "USA",
+    PostalCode: "98401",
   },
   {
-    id: 2,
-    name: "Nancy Davolio",
-    title: "Sales Representative",
-    titleOfCourtesy: "Ms.",
-    birthDate: "1980-12-08",
-    homePhone: "(206) 555-9857",
-    hireDate: "2020-05-01",
-    extension: "5467",
-    notes:
+    _key: 2,
+    FirstName: "Nancy",
+    Title: "Sales Representative",
+    TitleOfCourtesy: "Ms.",
+    BirthDate: "1980-12-08",
+    HomePhone: "(206) 555-9857",
+    HireDate: "2020-05-01",
+    Extension: "5467",
+    Notes:
       "Education includes a BA in psychology from Colorado State University in 1970.",
-    address: {
-      streetLine: "507 - 20th Ave. E. Apt. 2A",
-      city: "Seattle",
-      country: "USA",
-      postalCode: "98122",
-    },
-    reportsTo: {
-      id: 1,
-      name: "Andrew Fuller",
-    },
+    Address: "507 - 20th Ave. E. Apt. 2A",
+    City: "Seattle",
+    Country: "USA",
+    PostalCode: "98122",
+    // reportsTo: {
+    //   id: 1,
+    //   name: "Andrew Fuller",
+    // },
   },
 ];
 
@@ -287,18 +287,63 @@ export async function getCustomerById(id) {
   return Promise.resolve({});
 }
 
-export async function getEmployees() {
-  return Promise.resolve(employees);
+export async function getEmployees({ page, pageSize }) {
+  const functionName = "get-employees";
+
+  const params = {
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+  };
+
+  const encondedParams = encodeURIComponent(JSON.stringify(params).trim());
+
+  const response = await fetch(
+    `${baseUrl}/_fabric/${fabric}/_api/function/invoke/${functionName}?params=${encondedParams}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `apiKey ${apiKey}`,
+        accept: "application/json",
+      },
+      body: "",
+    }
+  );
+
+  const employees = await response.json();
+
+  // Additional temporary call to get document count.
+  const collectionName = "employees";
+  const total = await getDocumentCount(collectionName);
+
+  return {
+    total,
+    data: employees,
+  };
 }
 
 export async function getEmployeeById(id) {
   for (let i = 0; i < employees.length; i++) {
     const employee = employees[i];
 
-    if (employee.id === id) {
+    if (employee._key === 1) {
       return Promise.resolve(employee);
     }
   }
 
   return Promise.resolve({});
+}
+
+async function getDocumentCount(collectionName) {
+  const response = await fetch(
+    `${baseUrl}/_fabric/${fabric}/_api/collection/${collectionName}/count`,
+    {
+      headers: {
+        Authorization: `apiKey ${apiKey}`,
+        accept: "application/json",
+      },
+    }
+  );
+
+  const { count } = await response.json();
+  return count;
 }

@@ -14,15 +14,15 @@ export function SupplierDetail() {
       const supplier = await getSupplierById(Number(id));
 
       const data = [
-        { label: "Company Name", value: supplier.companyName },
-        { label: "Region", value: supplier.region },
-        { label: "Contact Name", value: supplier.name },
-        { label: "Postal Code", value: supplier.postalCode },
-        { label: "Contact Title", value: supplier.title },
-        { label: "Country", value: supplier.country },
-        { label: "Address", value: supplier.address },
-        { label: "Phone", value: supplier.phone },
-        { label: "City", value: supplier.city },
+        { label: "Company Name", value: supplier.CompanyName },
+        { label: "Region", value: supplier.Region },
+        { label: "Contact Name", value: supplier.ContactName },
+        { label: "Postal Code", value: supplier.PostalCode },
+        { label: "Contact Title", value: supplier.ContactTitle },
+        { label: "Country", value: supplier.Country },
+        { label: "Address", value: supplier.Address },
+        { label: "Phone", value: supplier.Phone },
+        { label: "City", value: supplier.City },
       ];
 
       setSupplier(data);

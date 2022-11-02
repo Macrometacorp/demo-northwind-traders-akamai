@@ -1,55 +1,70 @@
 import { useEffect, useState } from "react";
-import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
-import DataTable from "../../components/DataTable";
+import MyTable from "../../components/MyTable";
+import Pagination from "../../components/Pagination";
 import { getSuppliers } from "../../services";
 
-const columnHelper = createColumnHelper();
-
 const columns = [
-  columnHelper.accessor("companyName", {
-    header: "Company",
-    cell: (info) => {
+  {
+    Header: "Company",
+    accessor: "CompanyName",
+    Cell: (info) => {
       return (
-        <Link to={`/suppliers/${info.row.original.id}`}>{info.getValue()}</Link>
+        <Link to={`/suppliers/${info.row.original._key}`}>{info.value}</Link>
       );
     },
-  }),
-  columnHelper.accessor("name", {
-    header: "Contact",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("title", {
-    header: "Title",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("city", {
-    header: "City",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("country", {
-    header: "Country",
-    cell: (info) => info.getValue(),
-  }),
+  },
+  {
+    Header: "Contact",
+    accessor: "ContactName",
+  },
+  {
+    Header: "Title",
+    accessor: "ContactTitle",
+  },
+  {
+    Header: "City",
+    accessor: "City",
+  },
+  {
+    Header: "Country",
+    accessor: "Country",
+  },
 ];
 
 export function Suppliers() {
-  const [suppliers, setSuppliers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const [suppliers, setSuppliers] = useState({
+    totalDocuments: 0,
+    data: [],
+  });
 
   useEffect(() => {
-    const _getSuppliers = async () => {
-      const _suppliers = await getSuppliers();
+    const get = async () => {
+      const _suppliers = await getSuppliers({
+        page: currentPage,
+        pageSize,
+      });
+
       setSuppliers(_suppliers);
     };
 
-    _getSuppliers().catch(console.error);
-  }, []);
+    get().catch(console.error);
+  }, [currentPage]);
 
   return (
     <Box p="6" bg={useColorModeValue("white", "gray.800")} rounded="lg">
-      <DataTable title="Suppliers" columns={columns} data={suppliers} />
+      <MyTable title="Suppliers" columns={columns} data={suppliers.data} />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalItems={suppliers.totalDocuments}
+        ItemsPerPage={pageSize}
+      />
     </Box>
   );
 }

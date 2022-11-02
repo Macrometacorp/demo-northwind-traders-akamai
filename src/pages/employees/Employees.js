@@ -39,21 +39,18 @@ export function Employees() {
   const pageSize = 5;
 
   const [employees, setEmployees] = useState({
+    totalDocuments: 0,
     data: [],
-    total: 0,
   });
 
   useEffect(() => {
     const get = async () => {
-      const employees = await getEmployees({
+      const _employees = await getEmployees({
         page: currentPage,
         pageSize,
       });
 
-      setEmployees({
-        data: employees.data,
-        total: employees.total,
-      });
+      setEmployees(_employees);
     };
 
     get().catch(console.error);
@@ -65,7 +62,7 @@ export function Employees() {
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        totalItems={employees.total}
+        totalItems={employees.totalDocuments}
         ItemsPerPage={pageSize}
       />
     </Box>

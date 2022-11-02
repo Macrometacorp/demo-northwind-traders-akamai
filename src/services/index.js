@@ -1,32 +1,20 @@
-const baseUrl = process.env.REACT_APP_GDN_API_URL;
-const fabric = process.env.REACT_APP_FABRIC_NAME;
-const apiKey = process.env.REACT_APP_API_KEY;
+const BASE_URL = process.env.REACT_APP_GDN_API_URL;
+const FABRIC = process.env.REACT_APP_FABRIC_NAME;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 // Hard-coded dummy data
 const suppliers = [
   {
-    id: 1,
-    name: "Charlotte Cooper",
-    title: "Purchasing Manager",
-    companyName: "Exotic Liquids",
-    address: "49 Gilbert St.",
-    city: "London",
-    region: "British Isles",
-    country: "UK",
-    postalCode: "EC1 4SD",
-    phone: "(171) 555-2222",
-  },
-  {
-    id: 5,
-    name: "Antonio del Valle Saavedra",
-    title: "Export Administrator",
-    companyName: "Cooperativa de Quesos 'Las Cabras'",
-    address: "Calle del Rosal 4",
-    city: "Oviedo",
-    region: "Southern Europe",
-    country: "Spain",
-    postalCode: "33007",
-    phone: "(98) 598 76 54",
+    _key: "1",
+    ContactName: "Charlotte Cooper",
+    ContactTitle: "Purchasing Manager",
+    CompanyName: "Exotic Liquids",
+    Address: "49 Gilbert St.",
+    City: "London",
+    Region: "British Isles",
+    Country: "UK",
+    PostalCode: "EC1 4SD",
+    Phone: "(171) 555-2222",
   },
 ];
 
@@ -186,23 +174,7 @@ const orders = [
 
 const employees = [
   {
-    _key: 1,
-    FirstName: "Andrew",
-    Title: "Vice President, Sales",
-    TitleOfCourtesy: "Dr.",
-    BirthDate: "1984-02-19",
-    HomePhone: "(206) 555-9482",
-    HireDate: "2020-08-04",
-    Extension: "3457",
-    Notes:
-      "Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing from the University of Dallas in 1981.",
-    Address: "908 W. Capital Way",
-    City: "Tacoma",
-    Country: "USA",
-    PostalCode: "98401",
-  },
-  {
-    _key: 2,
+    _key: "1",
     FirstName: "Nancy",
     Title: "Sales Representative",
     TitleOfCourtesy: "Ms.",
@@ -216,22 +188,31 @@ const employees = [
     City: "Seattle",
     Country: "USA",
     PostalCode: "98122",
-    // reportsTo: {
-    //   id: 1,
-    //   name: "Andrew Fuller",
+    // ReportsTo: {
+    //   _key: 2,
+    //   FirstName: "Andrew",
+    //   LastName: "Fuller"
     // },
   },
 ];
 
-export async function getSuppliers() {
-  return Promise.resolve(suppliers);
+export async function getSuppliers(params) {
+  const suppliers = await await invokeFunction("get-suppliers", params);
+  // return suppliers
+
+  // Additional temporary call to get document count.
+  const totalDocuments = await getDocumentCount("suppliers");
+  return {
+    totalDocuments,
+    data: suppliers,
+  };
 }
 
 export async function getSupplierById(id) {
   for (let i = 0; i < suppliers.length; i++) {
     const supplier = suppliers[i];
 
-    if (supplier.id === id) {
+    if (supplier._key === "1") {
       return Promise.resolve(supplier);
     }
   }
@@ -287,36 +268,14 @@ export async function getCustomerById(id) {
   return Promise.resolve({});
 }
 
-export async function getEmployees({ page, pageSize }) {
-  const functionName = "get-employees";
-
-  const params = {
-    offset: (page - 1) * pageSize,
-    limit: pageSize,
-  };
-
-  const encondedParams = encodeURIComponent(JSON.stringify(params).trim());
-
-  const response = await fetch(
-    `${baseUrl}/_fabric/${fabric}/_api/function/invoke/${functionName}?params=${encondedParams}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `apiKey ${apiKey}`,
-        accept: "application/json",
-      },
-      body: "",
-    }
-  );
-
-  const employees = await response.json();
+export async function getEmployees(params) {
+  const employees = await invokeFunction("get-employees", params);
+  // return employees
 
   // Additional temporary call to get document count.
-  const collectionName = "employees";
-  const total = await getDocumentCount(collectionName);
-
+  const totalDocuments = await getDocumentCount("employees");
   return {
-    total,
+    totalDocuments,
     data: employees,
   };
 }
@@ -325,7 +284,7 @@ export async function getEmployeeById(id) {
   for (let i = 0; i < employees.length; i++) {
     const employee = employees[i];
 
-    if (employee._key === 1) {
+    if (employee._key === "1") {
       return Promise.resolve(employee);
     }
   }
@@ -333,12 +292,36 @@ export async function getEmployeeById(id) {
   return Promise.resolve({});
 }
 
+async function invokeFunction(functionName, { page, pageSize }) {
+  const params = {
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
+  };
+
+  const encondedParams = encodeURIComponent(JSON.stringify(params).trim());
+
+  const response = await fetch(
+    `${BASE_URL}/_fabric/${FABRIC}/_api/function/invoke/${functionName}?params=${encondedParams}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `apiKey ${API_KEY}`,
+        accept: "application/json",
+      },
+      body: "",
+    }
+  );
+
+  const data = await response.json();
+  return data;
+}
+
 async function getDocumentCount(collectionName) {
   const response = await fetch(
-    `${baseUrl}/_fabric/${fabric}/_api/collection/${collectionName}/count`,
+    `${BASE_URL}/_fabric/${FABRIC}/_api/collection/${collectionName}/count`,
     {
       headers: {
-        Authorization: `apiKey ${apiKey}`,
+        Authorization: `apiKey ${API_KEY}`,
         accept: "application/json",
       },
     }

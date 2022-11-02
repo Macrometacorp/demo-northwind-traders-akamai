@@ -12,7 +12,9 @@ const columns = [
     accessor: "FirstName",
     Cell: (info) => {
       return (
-        <Link to={`/employees/${info.row.original._key}`}>{info.value}</Link>
+        <Link
+          to={`/employees/${info.row.original._key}`}
+        >{`${info.value} ${info.row.original.LastName}`}</Link>
       );
     },
   },

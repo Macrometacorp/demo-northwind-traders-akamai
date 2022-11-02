@@ -3,66 +3,6 @@ const FABRIC = process.env.REACT_APP_FABRIC_NAME;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 // Hard-coded dummy data
-const suppliers = [
-  {
-    _key: "1",
-    ContactName: "Charlotte Cooper",
-    ContactTitle: "Purchasing Manager",
-    CompanyName: "Exotic Liquids",
-    Address: "49 Gilbert St.",
-    City: "London",
-    Region: "British Isles",
-    Country: "UK",
-    PostalCode: "EC1 4SD",
-    Phone: "(171) 555-2222",
-  },
-];
-
-const products = [
-  {
-    id: 1,
-    name: "Chai",
-    quantityPerUnit: "10 boxes x 20 bags",
-    unitPrice: 18,
-    unitsInStock: 39,
-    unitsInOrder: 0,
-    reorderLevel: 10,
-    discontinued: 0,
-    supplier: {
-      id: 1,
-      name: "Exotic Liquids",
-    },
-  },
-  {
-    id: 3,
-    name: "Aniseed Syrup",
-    quantityPerUnit: "12 - 550 ml bottles",
-    unitPrice: 10,
-    unitsInStock: 13,
-    unitsInOrder: 70,
-    reorderLevel: 25,
-    discontinued: 0,
-    supplier: {
-      id: 1,
-      name: "Exotic Liquids",
-    },
-  },
-  {
-    id: 11,
-    name: "Queso Cabrales",
-    quantityPerUnit: "1 kg pkg.",
-    unitPrice: 21,
-    unitsInStock: 22,
-    unitsInOrder: 30,
-    reorderLevel: 30,
-    discontinued: 0,
-    supplier: {
-      id: 5,
-      name: "Cooperativa de Quesos 'Las Cabras'",
-    },
-  },
-];
-
 const customers = [
   {
     id: 1,
@@ -172,30 +112,6 @@ const orders = [
   },
 ];
 
-const employees = [
-  {
-    _key: "1",
-    FirstName: "Nancy",
-    Title: "Sales Representative",
-    TitleOfCourtesy: "Ms.",
-    BirthDate: "1980-12-08",
-    HomePhone: "(206) 555-9857",
-    HireDate: "2020-05-01",
-    Extension: "5467",
-    Notes:
-      "Education includes a BA in psychology from Colorado State University in 1970.",
-    Address: "507 - 20th Ave. E. Apt. 2A",
-    City: "Seattle",
-    Country: "USA",
-    PostalCode: "98122",
-    // ReportsTo: {
-    //   _key: 2,
-    //   FirstName: "Andrew",
-    //   LastName: "Fuller"
-    // },
-  },
-];
-
 export async function getSuppliers(params) {
   const suppliers = await await invokeFunction("get-suppliers", params);
   // return suppliers
@@ -209,31 +125,47 @@ export async function getSuppliers(params) {
 }
 
 export async function getSupplierById(id) {
-  for (let i = 0; i < suppliers.length; i++) {
-    const supplier = suppliers[i];
-
-    if (supplier._key === "1") {
-      return Promise.resolve(supplier);
-    }
-  }
-
-  return Promise.resolve({});
+  return Promise.resolve({
+    _key: "1",
+    ContactName: "Charlotte Cooper",
+    ContactTitle: "Purchasing Manager",
+    CompanyName: "Exotic Liquids",
+    Address: "49 Gilbert St.",
+    City: "London",
+    Region: "British Isles",
+    Country: "UK",
+    PostalCode: "EC1 4SD",
+    Phone: "(171) 555-2222",
+  });
 }
 
-export async function getProducts() {
-  return Promise.resolve(products);
+export async function getProducts(params) {
+  const products = await await invokeFunction("get-products", params);
+  // return products
+
+  // Additional temporary call to get document count.
+  const totalDocuments = await getDocumentCount("products");
+  return {
+    totalDocuments,
+    data: products,
+  };
 }
 
 export async function getProductById(id) {
-  for (let i = 0; i < products.length; i++) {
-    const product = products[i];
-
-    if (product.id === id) {
-      return Promise.resolve(product);
-    }
-  }
-
-  return Promise.resolve({});
+  return Promise.resolve({
+    _key: "1",
+    ProductName: "Chai",
+    QuantityPerUnit: "10 boxes x 20 bags",
+    UnitPrice: 18,
+    UnitsInStock: 39,
+    UnitsOnOrder: 0,
+    ReorderLevel: 10,
+    Discontinued: 0,
+    Supplier: {
+      _key: 1,
+      CompanyName: "Exotic Liquids",
+    },
+  });
 }
 
 export async function getOrders() {
@@ -281,15 +213,27 @@ export async function getEmployees(params) {
 }
 
 export async function getEmployeeById(id) {
-  for (let i = 0; i < employees.length; i++) {
-    const employee = employees[i];
-
-    if (employee._key === "1") {
-      return Promise.resolve(employee);
-    }
-  }
-
-  return Promise.resolve({});
+  return Promise.resolve({
+    _key: "1",
+    FirstName: "Nancy",
+    Title: "Sales Representative",
+    TitleOfCourtesy: "Ms.",
+    BirthDate: "1980-12-08",
+    HomePhone: "(206) 555-9857",
+    HireDate: "2020-05-01",
+    Extension: "5467",
+    Notes:
+      "Education includes a BA in psychology from Colorado State University in 1970.",
+    Address: "507 - 20th Ave. E. Apt. 2A",
+    City: "Seattle",
+    Country: "USA",
+    PostalCode: "98122",
+    ReportsTo: {
+      _key: 2,
+      FirstName: "Andrew",
+      LastName: "Fuller",
+    },
+  });
 }
 
 async function invokeFunction(functionName, { page, pageSize }) {

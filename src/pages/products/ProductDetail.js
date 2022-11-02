@@ -14,18 +14,18 @@ export function ProductDetail() {
       const product = await getProductById(Number(id));
 
       const data = [
-        { label: "Product Name", value: product.name },
-        { label: "Units In Stock", value: product.unitsInStock },
+        { label: "Product Name", value: product.ProductName },
+        { label: "Units In Stock", value: product.UnitsInStock },
         {
           label: "Supplier",
-          value: product.supplier.name,
-          linkTo: `/suppliers/${product.supplier.id}`,
+          value: product.Supplier.CompanyName,
+          linkTo: `/suppliers/${product.Supplier._key}`,
         },
-        { label: "Units In Order", value: product.unitsInOrder },
-        { label: "Quantity Per Unit", value: product.quantityPerUnit },
-        { label: "Reorder Level", value: product.reorderLevel },
-        { label: "Unit Price", value: `$${product.unitPrice}` },
-        { label: "Discontinued", value: product.discontinued },
+        { label: "Units In Order", value: product.UnitsOnOrder },
+        { label: "Quantity Per Unit", value: product.QuantityPerUnit },
+        { label: "Reorder Level", value: product.ReorderLevel },
+        { label: "Unit Price", value: `$${product.UnitPrice}` },
+        { label: "Discontinued", value: product.Discontinued },
       ];
 
       setProduct(data);

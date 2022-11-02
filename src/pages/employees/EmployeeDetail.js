@@ -27,9 +27,9 @@ export function EmployeeDetail() {
         { label: "Address", value: employee.Address },
         // {
         //   label: "Reports To",
-        //   value: employee.reportsTo?.name,
-        //   linkTo: employee.reportsTo
-        //     ? `/employees/${employee.reportsTo.id}`
+        //   value: employee.ReportsTo?.FirstName,
+        //   linkTo: employee.ReportsTo
+        //     ? `/employees/${employee.ReportsTo._key}`
         //     : null,
         // },
         { label: "City", value: employee.City },

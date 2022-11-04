@@ -11,7 +11,7 @@ export function ProductDetail() {
 
   useEffect(() => {
     const getProduct = async () => {
-      const product = await getProductById(Number(id));
+      const product = await getProductById(id);
 
       const data = [
         { label: "Product Name", value: product.ProductName },

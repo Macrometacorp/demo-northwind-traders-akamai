@@ -11,19 +11,19 @@ export function CustomerDetail() {
 
   useEffect(() => {
     const getCustomer = async () => {
-      const customer = await getCustomerById(Number(id));
+      const customer = await getCustomerById(id);
 
       const data = [
-        { label: "Company Name", value: customer.companyName },
-        { label: "Postal Code", value: customer.postalCode },
-        { label: "Contact Name", value: customer.name },
-        { label: "Region", value: customer.region },
-        { label: "Contact Title", value: customer.title },
-        { label: "Country", value: customer.country },
-        { label: "Address", value: customer.address },
-        { label: "Phone", value: customer.phone },
-        { label: "City", value: customer.city },
-        { label: "Fax", value: customer.fax },
+        { label: "Company Name", value: customer.CompanyName },
+        { label: "Postal Code", value: customer.PostalCode },
+        { label: "Contact Name", value: customer.ContactName },
+        { label: "Region", value: customer.Region },
+        { label: "Contact Title", value: customer.ContactTitle },
+        { label: "Country", value: customer.Country },
+        { label: "Address", value: customer.Address },
+        { label: "Phone", value: customer.Phone },
+        { label: "City", value: customer.City },
+        { label: "Fax", value: customer.Fax },
       ];
 
       setCustomer(data);

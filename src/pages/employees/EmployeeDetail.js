@@ -11,10 +11,10 @@ export function EmployeeDetail() {
 
   useEffect(() => {
     const getEmployee = async () => {
-      const employee = await getEmployeeById(Number(id));
+      const employee = await getEmployeeById(id);
 
       const data = [
-        { label: "Name", value: employee.FirstName },
+        { label: "Name", value: `${employee.FirstName} ${employee.LastName}` },
         { label: "Postal Code", value: employee.PostalCode },
         { label: "Title", value: employee.Title },
         { label: "Country", value: employee.Country },
@@ -25,13 +25,15 @@ export function EmployeeDetail() {
         { label: "Hire Date", value: employee.HireDate },
         { label: "Notes", value: employee.Notes },
         { label: "Address", value: employee.Address },
-        // {
-        //   label: "Reports To",
-        //   value: employee.ReportsTo?.FirstName,
-        //   linkTo: employee.ReportsTo
-        //     ? `/employees/${employee.ReportsTo._key}`
-        //     : null,
-        // },
+        {
+          label: "Reports To",
+          value: employee.ReportsTo._key
+            ? `${employee.ReportsTo.FirstName} ${employee.ReportsTo.LastName}`
+            : "",
+          linkTo: employee.ReportsTo._key
+            ? `/employees/${employee.ReportsTo._key}`
+            : "",
+        },
         { label: "City", value: employee.City },
       ];
 

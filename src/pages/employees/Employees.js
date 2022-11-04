@@ -38,7 +38,7 @@ const columns = [
 
 export function Employees() {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 5;
+  const pageSize = 10;
 
   const [employees, setEmployees] = useState({
     totalDocuments: 0,

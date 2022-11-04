@@ -1,67 +1,83 @@
 import { useEffect, useState } from "react";
-import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
-import DataTable from "../../components/DataTable";
+import MyTable from "../../components/MyTable";
+import Pagination from "../../components/Pagination";
 import { getOrders } from "../../services";
 
-const columnHelper = createColumnHelper();
-
 const columns = [
-  columnHelper.accessor("id", {
-    header: "Id",
-    cell: (info) => {
-      return (
-        <Link to={`/orders/${info.row.original.id}`}>{info.getValue()}</Link>
-      );
+  {
+    Header: "Id",
+    accessor: "_key",
+    Cell: ({ value }) => {
+      return <Link to={`/orders/${value}`}>{value}</Link>;
     },
-  }),
-  columnHelper.accessor("products.totalPrice", {
-    header: "Total Price",
-    cell: (info) => `$${info.getValue()}`,
-  }),
-  columnHelper.accessor("products.differentProductCount", {
-    header: "Products",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("products.totalQuantity", {
-    header: "Quantity",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("createdAt", {
-    header: "Created At",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("customer.companyName", {
-    header: "Ship Name",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("shipping.city", {
-    header: "City",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("shipping.country", {
-    header: "Country",
-    cell: (info) => info.getValue(),
-  }),
+  },
+  {
+    Header: "Total Price",
+    accessor: "Products.TotalPrice",
+    Cell: ({ value }) => {
+      return `$${value}`;
+    },
+  },
+  {
+    Header: "Products",
+    accessor: "Products.DifferentProductCount",
+  },
+  {
+    Header: "Quantity",
+    accessor: "Products.TotalQuantity",
+  },
+  {
+    Header: "Shipped",
+    accessor: "ShippedDate",
+  },
+  {
+    Header: "Ship Name",
+    accessor: "ShipName",
+  },
+  {
+    Header: "City",
+    accessor: "ShipCity",
+  },
+  {
+    Header: "Country",
+    accessor: "ShipCountry",
+  },
 ];
 
 export function Orders() {
-  const [orders, setOrders] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const [orders, setOrders] = useState({
+    totalDocuments: 0,
+    data: [],
+  });
 
   useEffect(() => {
-    const _getOrders = async () => {
-      const _orders = await getOrders();
+    const get = async () => {
+      const _orders = await getOrders({
+        page: currentPage,
+        pageSize,
+      });
+
       setOrders(_orders);
     };
 
-    _getOrders().catch(console.error);
-  }, []);
+    get().catch(console.error);
+  }, [currentPage]);
 
   return (
     <Box p="6" bg={useColorModeValue("white", "gray.800")} rounded="lg">
-      <DataTable title="Orders" columns={columns} data={orders} />
+      <MyTable title="Orders" columns={columns} data={orders.data} />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalItems={orders.totalDocuments}
+        ItemsPerPage={pageSize}
+      />
     </Box>
   );
 }

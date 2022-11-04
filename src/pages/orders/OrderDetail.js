@@ -14,35 +14,31 @@ export function OrderDetail() {
   useEffect(() => {
     const getOrder = async () => {
       const order = await getOrderById(Number(id));
-      setProducts([...order.products.list]);
+      setProducts([...order.Products.List]);
 
       const data = [
         {
           label: "Customer Id",
-          value: order.customer.id,
-          linkTo: `/customers/${order.customer.id}`,
+          value: order.CustomerID,
+          linkTo: `/customers/${order.CustomerID}`,
         },
-        { label: "Order Date", value: order.createdAt },
-        {
-          label: "Ship Name",
-          value: order.customer.companyName,
-          linkTo: `/customers/${order.customer.id}`,
-        },
-        { label: "Required Date", value: order.shipping.requiredDate },
+        { label: "Order Date", value: order.OrderDate },
+        { label: "Ship Name", value: order.ShipName },
+        { label: "Required Date", value: order.RequiredDate },
         {
           label: "Total Products",
-          value: order.products.differentProductCount,
+          value: order.Products.DifferentProductCount,
         },
-        { label: "Shipped Date", value: order.shipping.shippedDate },
-        { label: "Total Quantity", value: order.products.totalQuantity },
-        { label: "Ship City", value: order.shipping.city },
-        { label: "Total Price", value: `$${order.products.totalPrice}` },
-        { label: "Ship Region", value: order.shipping.region },
-        { label: "Total Discount", value: `$${order.products.totalDiscount}` },
-        { label: "Ship Postal Code", value: order.shipping.postalCode },
-        { label: "Ship Via", value: order.shipping.via },
-        { label: "Ship Country", value: order.shipping.country },
-        { label: "Freight", value: `$${order.shipping.freight}` },
+        { label: "Shipped Date", value: order.ShippedDate },
+        { label: "Total Quantity", value: order.Products.TotalQuantity },
+        { label: "Ship City", value: order.ShipCity },
+        { label: "Total Price", value: `$${order.Products.TotalPrice}` },
+        { label: "Ship Region", value: order.ShipRegion },
+        { label: "Total Discount", value: `$${order.Products.TotalDiscount}` },
+        { label: "Ship Postal Code", value: order.ShipPostalCode },
+        { label: "Ship Via", value: order.Shipper.CompanyName },
+        { label: "Ship Country", value: order.ShipCountry },
+        { label: "Freight", value: `$${order.Freight}` },
       ];
 
       setOrder(data);

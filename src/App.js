@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import { theme } from "./theme";
 import Sidebar from "./components/Sidebar";
@@ -16,7 +16,7 @@ import Search from "./pages/Search";
 export default function App() {
   return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
+      <HashRouter basename="/">
         <Sidebar>
           <Routes>
             <Route path="/" exact element={<Home />} />
@@ -34,7 +34,7 @@ export default function App() {
             <Route path="/search" element={<Search />} />
           </Routes>
         </Sidebar>
-      </BrowserRouter>
+      </HashRouter>
     </ChakraProvider>
   );
 }

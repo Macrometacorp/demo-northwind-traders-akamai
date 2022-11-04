@@ -12,8 +12,11 @@ import {
 import { Link } from "react-router-dom";
 
 export default function DetailCard({ title, data, goBackPath }) {
+  const bgColor = useColorModeValue("white", "gray.800");
+  const textColor = useColorModeValue("primary.500", "primary.200");
+
   return (
-    <Box p={6} bg={useColorModeValue("white", "gray.800")} rounded="lg">
+    <Box p={6} bg={bgColor} rounded="lg">
       <Heading size="md" mb={6}>
         {title}
       </Heading>
@@ -23,7 +26,7 @@ export default function DetailCard({ title, data, goBackPath }) {
             <Text fontWeight="bold">{label}</Text>
             {linkTo ? (
               <Link to={linkTo}>
-                <Text>{value}</Text>
+                <Text color={textColor}>{value}</Text>
               </Link>
             ) : (
               <Text>{value}</Text>

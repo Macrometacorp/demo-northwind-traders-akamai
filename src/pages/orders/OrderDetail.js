@@ -32,13 +32,19 @@ export function OrderDetail() {
         { label: "Shipped Date", value: order.ShippedDate },
         { label: "Total Quantity", value: order.Products.TotalQuantity },
         { label: "Ship City", value: order.ShipCity },
-        { label: "Total Price", value: `$${order.Products.TotalPrice}` },
+        {
+          label: "Total Price",
+          value: `$${order.Products.TotalPrice.toFixed(2)}`,
+        },
         { label: "Ship Region", value: order.ShipRegion },
-        { label: "Total Discount", value: `$${order.Products.TotalDiscount}` },
+        {
+          label: "Total Discount",
+          value: `$${order.Products.TotalDiscount.toFixed(2)}`,
+        },
         { label: "Ship Postal Code", value: order.ShipPostalCode },
         { label: "Ship Via", value: order.Shipper.CompanyName },
         { label: "Ship Country", value: order.ShipCountry },
-        { label: "Freight", value: `$${order.Freight}` },
+        { label: "Freight", value: `$${order.Freight.toFixed(2)}` },
       ];
 
       setOrder(data);

@@ -24,7 +24,7 @@ export function ProductDetail() {
         { label: "Units In Order", value: product.UnitsOnOrder },
         { label: "Quantity Per Unit", value: product.QuantityPerUnit },
         { label: "Reorder Level", value: product.ReorderLevel },
-        { label: "Unit Price", value: `$${product.UnitPrice}` },
+        { label: "Unit Price", value: `$${product.UnitPrice.toFixed(2)}` },
         { label: "Discontinued", value: product.Discontinued },
       ];
 

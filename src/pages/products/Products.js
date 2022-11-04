@@ -1,43 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 
 import MyTable from "../../components/MyTable";
 import Pagination from "../../components/Pagination";
 import { getProducts } from "../../services";
 
-const columns = [
-  {
-    Header: "Name",
-    accessor: "ProductName",
-    Cell: (info) => {
-      return (
-        <Link to={`/products/${info.row.original._key}`}>{info.value}</Link>
-      );
-    },
-  },
-  {
-    Header: "Qt per unit",
-    accessor: "QuantityPerUnit",
-  },
-  {
-    Header: "Price",
-    accessor: "UnitPrice",
-    Cell: ({ value }) => {
-      return `$${value}`;
-    },
-  },
-  {
-    Header: "Stock",
-    accessor: "UnitsInStock",
-  },
-  {
-    Header: "Orders",
-    accessor: "UnitsOnOrder",
-  },
-];
-
 export function Products() {
+  const columns = useMemo(
+    () => [
+      {
+        Header: "Name",
+        accessor: "ProductName",
+        Cell: (info) => {
+          return (
+            <Link to={`/products/${info.row.original._key}`}>
+              <Text color={useColorModeValue("primary.500", "primary.200")}>
+                {info.value}
+              </Text>
+            </Link>
+          );
+        },
+      },
+      {
+        Header: "Qt per unit",
+        accessor: "QuantityPerUnit",
+      },
+      {
+        Header: "Price",
+        accessor: "UnitPrice",
+        Cell: ({ value }) => {
+          return `$${value.toFixed(2)}`;
+        },
+      },
+      {
+        Header: "Stock",
+        accessor: "UnitsInStock",
+      },
+      {
+        Header: "Orders",
+        accessor: "UnitsOnOrder",
+      },
+    ],
+    []
+  );
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 

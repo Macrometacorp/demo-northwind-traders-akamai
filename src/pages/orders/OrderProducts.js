@@ -21,14 +21,14 @@ const columns = [
     Header: "Order Price",
     accessor: "UnitPrice",
     Cell: ({ value }) => {
-      return `$${value}`;
+      return `$${value.toFixed(2)}`;
     },
   },
   {
     Header: "Total Price",
     accessor: "TotalPrice",
     Cell: ({ value }) => {
-      return `$${value}`;
+      return `$${value.toFixed(2)}`;
     },
   },
   {

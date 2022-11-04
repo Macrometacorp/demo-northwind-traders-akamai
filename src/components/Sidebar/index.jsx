@@ -12,7 +12,7 @@ import {
 import {
   FaBars,
   FaHome,
-  FaTachometerAlt,
+  //FaTachometerAlt,
   FaTruckLoading,
   FaBox,
   FaShoppingCart,
@@ -27,7 +27,7 @@ import Logotype from "../Logotype";
 
 const LinkItems = [
   { name: "Home", icon: FaHome, path: "/" },
-  { name: "Dashboard", icon: FaTachometerAlt, path: "/dashboard" },
+  //{ name: "Dashboard", icon: FaTachometerAlt, path: "/dashboard" },
   { name: "Suppliers", icon: FaTruckLoading, path: "/suppliers" },
   { name: "Products", icon: FaBox, path: "/products" },
   { name: "Orders", icon: FaShoppingCart, path: "/orders" },

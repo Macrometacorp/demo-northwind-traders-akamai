@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Northwind Traders
+:sparkles: Live Demo: https://macrometacorp.github.io/demo-northwind-traders/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+This is a demo of the Northwind Traders dataset, running on Macrometa.  
 
-## Available Scripts
+![screenshot.png](screenshot.png)
 
-In the project directory, you can run:
+## More Info
+Macrometa resources were created in:  
+**Federation**: `play.paas.macrometa.io`  
+**Fabric**: `_system`  
+**Tenant**: `dino.lozina@macrometa.com`
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Run it Locally
+### Prerequisites
+You will have to had Node.js 18 (or later) installed in your system. Run the following command in your CLI to check your Node.js version.
+```
+node -v 
+```
+### Steps
+As a first step, open a CLI and run the command below to clone this repository. You can do:
+```
+git clone https://github.com/Macrometacorp/demo-northwind-traders.git
+```
+or 
+```
+git clone git@github.com:Macrometacorp/demo-northwind-traders.git
+```
+depending on your GitHub authentication method.  
+Then, change directory to your new project with:
+```
+cd demo-northwind-traders
+```
+Create a new `.env.local` file and add your environment variables there.  
+Here is how `.env.local` file should look like:
+```
+REACT_APP_GDN_API_URL=https://api-my.gdn.com
+REACT_APP_FABRIC_NAME=my_fabric
+REACT_APP_API_KEY=...
+```
+**Note**: `.env.sample` is only an sample file that you can also use as a guide.  
+Now install the project dependencies with:
+```
+npm install
+```
+Finally, run:
+```
+npm start
+```
+to start a local development server on `http://localhost:3000`

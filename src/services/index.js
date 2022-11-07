@@ -78,7 +78,7 @@ export async function getEmployeeById(id) {
 }
 
 export async function runSearch(functionName, params) {
-  const result  = await invokeFunction(functionName, params)
+  const { result }  = await invokeFunction(functionName, params)
   return result;
 }
 
@@ -98,6 +98,5 @@ async function invokeFunction(functionName, params) {
   );
 
   const result = await response.json();
-  console.log(result)
   return result[0];
 }

@@ -40,7 +40,7 @@ export default function Search() {
 
     const search = async () => {
       const results = await runSearch(functionName, {
-          keyword: keyword.toLowerCase(),
+        keyword: keyword.toLowerCase(),
       });
       setResults(results);
     };

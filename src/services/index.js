@@ -77,21 +77,8 @@ export async function getEmployeeById(id) {
   return employee;
 }
 
-export async function runSavedQuery(queryName, params) {
-  const response = await fetch(
-    `${BASE_URL}/_fabric/${FABRIC}/_api/restql/execute/${queryName}`,
-    {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        Authorization: `apiKey ${API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(params),
-    }
-  );
-
-  const { result } = await response.json();
+export async function runSearch(functionName, params) {
+  const result  = await invokeFunction(functionName, params)
   return result;
 }
 
@@ -111,5 +98,6 @@ async function invokeFunction(functionName, params) {
   );
 
   const result = await response.json();
+  console.log(result)
   return result[0];
 }

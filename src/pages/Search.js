@@ -15,21 +15,21 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
-import { runSavedQuery } from "../services";
+import { runSearch } from "../services";
 
-const SEARCH_PRODUCT_QUERY = "search-product";
-const SEARCH_CUSTOMER_QUERY = "search-customer";
+const SEARCH_PRODUCT_FUNCTION = "search-product";
+const SEARCH_CUSTOMER_FUNCTION = "search-customer";
 
 export default function Search() {
   const [keyword, setKeyword] = useState("");
-  const [queryName, setQueryName] = useState(SEARCH_PRODUCT_QUERY);
+  const [functionName, setFunctionName] = useState(SEARCH_PRODUCT_FUNCTION);
   const [results, setResults] = useState([]);
 
   const debouncedSetKeyword = debounce(setKeyword, 400);
 
   const handleRadioChange = (value) => {
     setResults([]);
-    setQueryName(value);
+    setFunctionName(value);
   };
 
   useEffect(() => {
@@ -39,16 +39,13 @@ export default function Search() {
     }
 
     const search = async () => {
-      const results = await runSavedQuery(queryName, {
-        bindVars: {
+      const results = await runSearch(functionName, {
           keyword: keyword.toLowerCase(),
-        },
       });
-
       setResults(results);
     };
     search().catch(console.error);
-  }, [keyword, queryName]);
+  }, [keyword, functionName]);
 
   return (
     <Box p="6" bg={useColorModeValue("white", "gray.800")} rounded="lg">
@@ -72,10 +69,10 @@ export default function Search() {
       <Box my={6}>
         <Heading size="sm">Collections</Heading>
 
-        <RadioGroup mt={2} onChange={handleRadioChange} value={queryName}>
+        <RadioGroup mt={2} onChange={handleRadioChange} value={functionName}>
           <Stack direction="row" gap={4}>
-            <Radio value={SEARCH_PRODUCT_QUERY}>Products</Radio>
-            <Radio value={SEARCH_CUSTOMER_QUERY}>Customers</Radio>
+            <Radio value={SEARCH_PRODUCT_FUNCTION}>Products</Radio>
+            <Radio value={SEARCH_CUSTOMER_FUNCTION}>Customers</Radio>
           </Stack>
         </RadioGroup>
       </Box>
@@ -88,7 +85,7 @@ export default function Search() {
             <Text>No results</Text>
           ) : (
             <Flex direction="column">
-              {queryName === SEARCH_PRODUCT_QUERY
+              {functionName === SEARCH_PRODUCT_FUNCTION
                 ? results.map((product, i) => (
                     <ProductItem key={i} product={product} />
                   ))

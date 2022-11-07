@@ -77,29 +77,30 @@ export async function getEmployeeById(id) {
   return employee;
 }
 
-export async function runSavedQuery(queryName, params) {
+export async function runSearch(functionName, params) {
+  const encodedParams = encodeURIComponent(JSON.stringify(params).trim());
+
   const response = await fetch(
-    `${BASE_URL}/_fabric/${FABRIC}/_api/restql/execute/${queryName}`,
+    `${BASE_URL}/_fabric/${FABRIC}/_api/function/invoke/${functionName}?params=${encodedParams}`,
     {
       method: "POST",
       headers: {
-        accept: "application/json",
         Authorization: `apiKey ${API_KEY}`,
-        "Content-Type": "application/json",
+        accept: "application/json",
       },
-      body: JSON.stringify(params),
+      body: "",
     }
   );
 
-  const { result } = await response.json();
+  const result = await response.json();
   return result;
 }
 
 async function invokeFunction(functionName, params) {
-  const encondedParams = encodeURIComponent(JSON.stringify(params).trim());
+  const encodedParams = encodeURIComponent(JSON.stringify(params).trim());
 
   const response = await fetch(
-    `${BASE_URL}/_fabric/${FABRIC}/_api/function/invoke/${functionName}?params=${encondedParams}`,
+    `${BASE_URL}/_fabric/${FABRIC}/_api/function/invoke/${functionName}?params=${encodedParams}`,
     {
       method: "POST",
       headers: {

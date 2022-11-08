@@ -8,7 +8,7 @@ This is a demo of the Northwind Traders dataset, running on Macrometa.
 
 ## More Info
 Macrometa resources were created in:  
-**Federation**: `play.paas.macrometa.io`  
+**Federation**: `play.macrometa.io`  
 **Fabric**: `_system`  
 **Tenant**: `dino.lozina@macrometa.com`
 

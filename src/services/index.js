@@ -1,4 +1,5 @@
-const BASE_URL = process.env.REACT_APP_GDN_API_URL;
+const FUNCTIONS_PLATFORM_BASE_URL =
+  process.env.REACT_APP_FUNCTIONS_PLATFORM_BASE_URL;
 const FABRIC = process.env.REACT_APP_FABRIC_NAME;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -81,7 +82,7 @@ export async function runSearch(functionName, params) {
   const encodedParams = encodeURIComponent(JSON.stringify(params).trim());
 
   const response = await fetch(
-    `${BASE_URL}/_fabric/${FABRIC}/_api/function/invoke/${functionName}?params=${encodedParams}`,
+    `${FUNCTIONS_PLATFORM_BASE_URL}/mm-${FABRIC}-${functionName}?bindVars=${encodedParams}`,
     {
       method: "POST",
       headers: {
@@ -100,7 +101,7 @@ async function invokeFunction(functionName, params) {
   const encodedParams = encodeURIComponent(JSON.stringify(params).trim());
 
   const response = await fetch(
-    `${BASE_URL}/_fabric/${FABRIC}/_api/function/invoke/${functionName}?params=${encodedParams}`,
+    `${FUNCTIONS_PLATFORM_BASE_URL}/mm-${FABRIC}-${functionName}?bindVars=${encodedParams}`,
     {
       method: "POST",
       headers: {

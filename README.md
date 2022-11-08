@@ -35,7 +35,7 @@ cd demo-northwind-traders
 Create a new `.env.local` file and add your environment variables there.  
 Here is how `.env.local` file should look like:
 ```
-REACT_APP_GDN_API_URL=https://api-my.gdn.com
+REACT_APP_FUNCTIONS_PLATFORM_BASE_URL=https://macrometa-akamai-ew.macrometa.io
 REACT_APP_FABRIC_NAME=my_fabric
 REACT_APP_API_KEY=...
 ```

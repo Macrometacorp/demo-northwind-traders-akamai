@@ -19,7 +19,7 @@ You will have to had Node.js 18 (or later) installed in your system. Run the fol
 node -v 
 ```
 ### Steps
-As a first step, open a CLI and run the command below to clone this repository. You can do:
+1\. Open a CLI and run the command below to clone this repository. You can do:
 ```
 git clone https://github.com/Macrometacorp/demo-northwind-traders.git
 ```
@@ -28,11 +28,13 @@ or
 git clone git@github.com:Macrometacorp/demo-northwind-traders.git
 ```
 depending on your GitHub authentication method.  
-Then, change directory to your new project with:
+
+2\. Change directory to your new project with:
 ```
 cd demo-northwind-traders
 ```
-Create a new `.env.local` file and add your environment variables there.  
+
+3\. Create a new `.env.local` file and add your environment variables there.  
 Here is how `.env.local` file should look like:
 ```
 REACT_APP_FUNCTIONS_PLATFORM_BASE_URL=https://macrometa-akamai-ew.macrometa.io
@@ -40,11 +42,13 @@ REACT_APP_FABRIC_NAME=my_fabric
 REACT_APP_API_KEY=...
 ```
 **Note**: `.env.sample` is only an sample file that you can also use as a guide.  
-Now install the project dependencies with:
+
+4\. Install the project dependencies with:
 ```
 npm install
 ```
-Finally, run:
+
+5\. Run:
 ```
 npm start
 ```

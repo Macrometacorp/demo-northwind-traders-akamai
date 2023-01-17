@@ -1,8 +1,8 @@
 {
-  "name": "northwind-traders",
+  "name": "northwind-traders-akamai",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://macrometacorp.github.io/demo-northwind-traders/",
+  "homepage": "https://macrometacorp.github.io/demo-northwind-traders-akamai/",
   "dependencies": {
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.6",

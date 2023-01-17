@@ -1,5 +1,5 @@
 # Northwind Traders
-:sparkles: Live Demo: https://macrometacorp.github.io/demo-northwind-traders/
+:sparkles: Live Demo: https://macrometacorp.github.io/demo-northwind-traders-akamai/
 
 ## Overview
 This is a demo of the Northwind Traders dataset, running on Macrometa.  
@@ -20,17 +20,17 @@ node -v
 ### Steps
 1\. Open a CLI and run the command below to clone this repository. You can do:
 ```
-git clone https://github.com/Macrometacorp/demo-northwind-traders.git
+git clone https://github.com/Macrometacorp/demo-northwind-traders-akamai.git
 ```
 or 
 ```
-git clone git@github.com:Macrometacorp/demo-northwind-traders.git
+git clone git@github.com:Macrometacorp/demo-northwind-traders-akamai.git
 ```
 depending on your GitHub authentication method.  
 
 2\. Change directory to your new project with:
 ```
-cd demo-northwind-traders
+cd demo-northwind-traders-akamai
 ```
 
 3\. Create a new `.env.local` file and add your environment variables there.  
